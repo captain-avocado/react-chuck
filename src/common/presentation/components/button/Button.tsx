@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from 'react';
-import { StringLiteral } from 'typescript';
 import { ButtonWrapper } from './Styles';
 
 interface Props {
