@@ -14,6 +14,8 @@ import { TopRow, Buttons, ButtonWrapper, JokeWrapper } from './Styles';
 import { routePaths } from '../../../../common/presentation/router/enums/route-paths';
 import { jokesFetchingTimeout } from './constants/jokes-fetching-timeout';
 
+let intervalId: number | undefined = undefined;
+
 export const JokesDashboard: FC = () => {
   const dispatch = useDispatch();
   const activeJoke = useSelector(getActiveJoke);
@@ -40,12 +42,12 @@ export const JokesDashboard: FC = () => {
     const interval = setInterval(() => {
       handleGetJoke();
     }, jokesFetchingTimeout);
+    intervalId = interval;
     setJokesFetchingInterval(interval);
   };
 
   const handleStopGettingJokes = async (): Promise<void> => {
-    console.log({ jokesFetchingInterval });
-    clearInterval(jokesFetchingInterval);
+    clearInterval(intervalId);
     setJokesFetchingInterval(undefined);
   };
 
